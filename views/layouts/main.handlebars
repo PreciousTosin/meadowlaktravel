@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Meadowlark Travel</title>
+		
+		{{#if showTests}}
+			<link rel="stylesheet" href="{{static '/vendor/mocha.css'}}">
+			<!--<link rel="stylesheet" href="/vendor/mocha.css">-->
+		{{/if}}
+
+		{{{_sections.head}}}
+		
+		<meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="{{static '/vendor/bootstrap/css/bootstrap.min.css'}}">
+        <!--<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">-->
+        <style>
+        	a.currency {
+				text-decoration: none;
+			}
+			.currency.selected {
+				font-weight: bold;
+				font-size: 150%;
+			}
+			.dealers #map {
+				width: 100%;
+				height: 600px;
+			}
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <!--<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">-->
+        <!--<link rel="stylesheet" href="/css/main.css">-->
+        <!--<link rel="stylesheet" href="{{static '/vendor/bootstrap/css/bootstrap.min.css'}}">
+        <link rel="stylesheet" href="{{static /css/main.css}}">-->
+        <link rel="stylesheet" href="{{static '/vendor/bootstrap/css/bootstrap-theme.min.css'}}">
+
+        <!--<script src="/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
+
+		
+		<script src="{{static '/vendor/js/jquery-3.1.0.js'}}"></script>
+		<script src="{{static '/vendor/bootstrap/js/bootstrap.js'}}"></script>
+		<script src="{{static '/vendor/js/js.cookie.js'}}"></script>
+		<!--<script src="/vendor/js/jquery-3.1.0.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.js"></script>-->
+		
+		{{#each _bundles.css}}
+			<link rel="stylesheet" href="{{static .}}">
+		{{/each}}
+		
+		{{#each _bundles.js.head}}
+			<script src="{{static .}}"></script>
+		{{/each}}
+
+		<!--<script src="//code.jquery.com/jquery-2.0.2.min.js"></script>-->
+		<!--<link rel="stylesheet" href="{{static /css/main.css}}">-->
+		<script src="{{static '/vendor/js/modernizr-2.6.2-respond-1.1.0.min.js'}}"></script>
+		<!--<script>
+			var identity
+			$.get('/userid', function(data){
+              identity = data;
+              alert(identity);
+
+              $.get('/customer/'+ identity, function(data){
+              	alert('successful');
+             });
+            });	
+		</script>-->
+	</head>
+
+	<body>
+
+		<!--<header><h1>Meadowlark Travel</h1></header>
+		<header><img src="/img/logo.svg" alt="Meadowlark Travel Logo"></header>-->
+		<header>
+			<!--<img src="{{static '/img/logo.svg'}}" <a href=""></alt="Meadowlark Travel Logo">-->
+			<div class="row">
+				<div class="col-sm-4">
+					<img src="{{logoImage}}" alt="Meadowlark Travel Logo">
+				</div>
+				<div class="col-sm-2 pull-right">	
+					{{! The following represents a lot of code duplication, so we will probably want to
+						change this in the future }}
+					{{#if cartItems}}
+						<a href="/cart"><img class="cartIcon" src="{{static '/img/shop/cart_full.png'}}"
+							alt="Cart Empty"></a>
+					{{else}}
+						<a href="/cart"><img class="cartIcon" src="{{static '/img/shop/cart_empty.png'}}"
+							alt="Cart Contains {{cartItems}} Items"></a>
+					{{/if}}
+				</div>
+			</div>
+
+		</header>
+			
+		<div class="container">
+
+			<!--<script src="/vendor/js/jquery-3.1.0.js"></script>
+			<script src="/vendor/bootstrap/js/bootstrap.js"></script>-->
+			<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+			{{#if flash}}
+				<div class="alert alert-dismissible alert-{{flash.type}}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;<button>
+					<strong>{{flash.intro}}</strong> {{{flash.message}}}
+				</div>
+			{{/if}}
+
+			{{{body}}}
+
+			<hr>
+				<h2>On Twitter:</h2>
+				{{{topTweets}}}
+			<hr>
+
+			<footer>
+				<p>&copy; {{copyrightYear}} Meadowlark Travel 2016</p>
+			</footer>
+		</div>
+			
+		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+		<!--{{{_sections.jquery}}}-->
+					
+			<script>window.jQuery || document.write('<script src="{{static '/vendor/js/jquery-2.1.1.min.js'}}"><\/script>')</script>
+			<!--<script>window.jQuery || document.write('<script src="/vendor/js/jquery-2.1.1.min.js"><\/script>')</script>-->
+
+			<script>
+				var IMG_CART_EMPTY =  '{{static '/img/shop/cart_empty.png'}}';
+				var IMG_CART_FULL = '{{static '/img/shop/cart_full.png'}}';
+
+				// simple client-side cart implementation (mostly mocked for now)
+				var cart = (function() {
+					// normally we would get this from an AJAX call, or some similar method
+					var items = Array({{cartItems}});
+					return {
+						items: items,
+						isEmpty: function() {
+							return !items.length;
+						},
+						addItem: function(id) {
+							items.push(id);
+							$(document).trigger('meadowlark_cart_changed');
+						}
+					};
+				})();
+
+				$(document).on('meadowlark_cart_changed', function(){
+					$('header img.cartIcon').attr('src', cart.isEmpty() ?
+					IMG_CART_EMPTY : IMG_CART_FULL );
+				});
+			</script>
+				
+		{{{_sections.jquery}}}
+
+		{{#if showTests}}
+			<div id="mocha"></div>
+				<script src="{{static '/vendor/mocha.js'}}"></script>
+				<script src="{{static '/vendor/chai.js'}}"></script>
+				<!--<script src="/vendor/mocha.js"></script>
+				<script src="/vendor/chai.js"></script>-->
+			<script>
+				mocha.ui('tdd');
+				var assert = chai.assert;
+			</script>
+			<script src="{{static '/qa/tests-global.js'}}"></script>
+			<!--<script src="/qa/tests-global.js"></script>-->
+				{{#if pageTestScript}}
+					<script src="{{pageTestScript}}"></script>
+				{{/if}}
+			<script>mocha.run();</script>
+		{{/if}}
+				
+		<script src="{{static '/vendor/bootstrap/js/bootstrap.min.js'}}"></script>
+		<script src="{{static '/js/main.js'}}"></script>
+		
+	</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "name": "precioustosin",
+  "version": "1.0.0",
+  "description": "Website for a travel company",
+  "main": "meadowlark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tosin Akinbobola",
+  "license": "ISC",
+  "engines" : {
+    "node": "4.4.3"
+  }, 
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect": "^2.0.3",
+    "connect-bundle": "0.0.5-beta",
+    "connect-flash": "^0.1.1",
+    "connect-rest": "^2.9.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
+    "csurf": "^1.9.0",
+    "express": "^4.14.0",
+    "express-flash": "0.0.2",
+    "express-logger": "0.0.3",
+    "express-session": "^1.14.1",
+    "express3-handlebars": "^0.5.2",
+    "formidable": "^1.0.17",
+    "jquery-file-upload-middleware": "^0.1.8",
+    "loadtest": "^2.0.2",
+    "mongoose": "^4.6.0",
+    "morgan": "^1.7.0",
+    "nodemailer": "^2.6.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "q": "^1.4.1",
+    "session-mongoose": "^0.5.2",
+    "underscore": "^1.8.3",
+    "vhost": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^0.4.5",
+    "grunt-cafe-mocha": "^0.1.13",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-exec": "^1.0.0",
+    "grunt-hashres": "^0.4.1",
+    "grunt-lint-pattern": "^0.1.4",
+    "mocha": "^3.0.2",
+    "restler": "^3.4.0",
+    "zombie": "^3.1.1"
+  }
+}
